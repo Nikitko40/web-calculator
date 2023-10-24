@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>WebCalculatorApplication</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<!--Навбар-->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">Операции
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a th:href="@{/history}" style="text-decoration: none;">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                    role="tab" aria-controls="profile" aria-selected="false">История операций
+            </button>
+        </a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <!--Группа кнопок-->
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="#!" data-bs-toggle="modal" data-bs-target="#additionModal">
+                    Сложение 2-х и более чисел</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!" data-bs-toggle="modal" data-bs-target="#multiplyModal">
+                    Умножение 2-х и более чисел</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!" data-bs-toggle="modal" data-bs-target="#multiplyAdditionModal">
+                    Умножение первых 2-х чисел и сложение с 3-м числом</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!" data-bs-toggle="modal" data-bs-target="#divideModal">
+                    Деление 2-х и более чисел</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- additionModal -->
+<div class="modal fade" id="additionModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <form th:action="@{/addition}" method="post">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Сложение 2-х и более чисел</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="addition" class="col-form-label">Введите операцию в формате: 1 + 2 + 3 + ...</label>
+                        <input type="text" class="form-control"
+                               id="addition" name="result"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Получить вычисления</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- multiplyModal -->
+<div class="modal fade" id="multiplyModal" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <form th:action="@{/multiply}" method="post">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Умножение 2-х и более чисел</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="multiply" class="col-form-label">Введите операцию в формате: 1 * 2 * 3 * ...</label>
+                        <input type="text" class="form-control"
+                               id="multiply" name="result"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Получить вычисления</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- multiplyAdditionModal -->
+<div class="modal fade" id="multiplyAdditionModal" tabindex="-1" aria-labelledby="exampleModalLabel3"
+     aria-hidden="true">
+    <form th:action="@{/addition-multiply}" method="post">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">Умножение первых 2-х чисел и сложение с 3-м
+                        числом</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="multiplyAddition" class="col-form-label">Введите операцию в формате: 1 * 2 +
+                            3</label>
+                        <input type="text" class="form-control"
+                               id="multiplyAddition" name="result"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Получить вычисления</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- divideModal -->
+<div class="modal fade" id="divideModal" tabindex="-1" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+    <form th:action="@{/divide}" method="post">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel4">Деление 2-х и более чисел</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="divide" class="col-form-label">Введите операцию в формате: 1 : 2 / 3 *...</label>
+                        <input type="text" class="form-control"
+                               id="divide" name="result"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Получить вычисления</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
